@@ -1,0 +1,16 @@
+development:
+  db_server: "localhost"
+  db_collection: "sunfoxtravel_development"
+  db_login: ""
+  db_pass: ""
+  
+  asset_servers:
+    devel:
+      host: 127.0.0.1
+      port: 3000
+    app:
+      host: sunfoxtravel.ru
+      port: 80
+    cdn:
+      host: 345c2d7fd08550eb769e-ac23f052efa4937a4ab15119f6923a85.r41.cf1.rackcdn.com
+      port: 80

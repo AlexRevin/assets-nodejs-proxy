@@ -1,0 +1,12 @@
+{
+  "name": "sft.assets",
+  "description": "asset forwarder",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.0.3",
+    "coffee-script": ">=1.1.1",
+    "mongodb":"1.1.11",
+    "js-yaml": ">=1.0.3"
+  }
+}
