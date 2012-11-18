@@ -6,7 +6,7 @@ lib-cov
 *.out
 *.pid
 *.gz
-conf/app.yml
+config/app.yml
 
 pids
 logs
