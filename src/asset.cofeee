@@ -18,7 +18,7 @@ class Asset
     @_findAsset asset_id, (record) =>
       storage = @asset_servers[record["storage"]] || @asset_servers["cdn"]
       if old?
-        url = "http://#{storage['host']}:#{storage['port']}/uploads/assets/image/#{asset_id}/#{file_name}"
+        url = "http://#{storage['host']}:#{storage['port']}/uploads/asset/image/#{asset_id}/#{file_name}"
       else
         url = "http://#{storage['host']}:#{storage['port']}/uploads/#{asset_id}/#{file_name}"
       callback(url)
