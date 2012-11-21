@@ -14,7 +14,7 @@ class Asset
     @collection = opts.db_collection
     @asset_servers = opts.asset_servers
     
-  url: (asset_id, file_name, old, callback) =>
+  url: (asset_id, file_name, callback) =>
     @_findAsset asset_id, (record) =>
       return callback("http://google.com") unless record
       storage = @asset_servers[record["storage"]] || @asset_servers["cdn"]

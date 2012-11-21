@@ -10,7 +10,7 @@ asset_klass = require('./lib/asset.js').Asset
 asset = new asset_klass conf
     
 app.get "/uploads/:image_id/:file_name", (req, res) ->
-  asset.url req.params.image_id, req.params.file_name, old, (url) ->
+  asset.url req.params.image_id, req.params.file_name, (url) ->
     res.redirect url
     
 app.listen conf.port
