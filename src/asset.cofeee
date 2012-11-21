@@ -29,5 +29,6 @@ class Asset
       conn.collection "assets", (dbErr, collection) => 
         collection.find({_id: o_id}).nextObject (err, result) =>
           callback(result) unless err?
+          conn.close()
           
 exports.Asset = Asset
