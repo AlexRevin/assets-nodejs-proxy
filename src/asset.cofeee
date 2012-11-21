@@ -8,6 +8,8 @@ class Asset
     @Asset = this
     @host = opts.asset_host
     @port = opts.asset_port
+    @user_name = opts.db_login
+    @password = opts.db_pass
     @server_ip = opts.db_server
     @collection = opts.db_collection
     @asset_servers = opts.asset_servers
@@ -22,10 +24,11 @@ class Asset
     o_id = new BSON.ObjectID asset_id
     server = new mongo.Server @server_ip, 27017, {}
     client = new mongo.Db @collection, server, {safe: true}
-    client.open (err, database) =>
-      client.collection "assets", (dbErr, collection) => 
-        collection.find({_id: o_id}).nextObject (err, result) =>
-          client.close()
-          callback(result) unless err?
+    client.authenticate @user_name, @password, ->
+      client.open (err, database) =>
+        client.collection "assets", (dbErr, collection) => 
+          collection.find({_id: o_id}).nextObject (err, result) =>
+            client.close()
+            callback(result) unless err?
           
 exports.Asset = Asset

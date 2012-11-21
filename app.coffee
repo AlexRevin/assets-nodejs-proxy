@@ -1,5 +1,4 @@
 require 'js-yaml'
-
 express = require 'express'
 mongo = require 'mongodb'
 
