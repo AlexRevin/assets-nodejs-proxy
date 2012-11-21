@@ -22,13 +22,9 @@ class Asset
   
   _findAsset: (asset_id, callback) ->
     o_id = new BSON.ObjectID asset_id
-    server = new mongo.Server @server_ip, 27017, {}
-    client = new mongo.Db @collection, server, {safe: true}
-    client.authenticate @user_name, @password, ->
-      client.open (err, database) =>
-        client.collection "assets", (dbErr, collection) => 
-          collection.find({_id: o_id}).nextObject (err, result) =>
-            client.close()
-            callback(result) unless err?
+    mongo.connect "mongodb://#{@user_name}:#{@password}@#{@server_ip}/#{@collection}?auto_reconnect=true&safe=true", (err, conn) ->
+      conn.collection "assets", (dbErr, collection) => 
+        collection.find({_id: o_id}).nextObject (err, result) =>
+          callback(result) unless err?
           
 exports.Asset = Asset

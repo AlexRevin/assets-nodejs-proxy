@@ -13,4 +13,4 @@ app.get "/uploads/:image_id/:file_name", (req, res) ->
   asset.url req.params.image_id, req.params.file_name, false, (url) ->
     res.redirect url
     
-app.listen 3100
+app.listen conf.port
