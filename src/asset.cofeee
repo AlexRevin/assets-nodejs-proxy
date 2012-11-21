@@ -16,8 +16,9 @@ class Asset
     
   url: (asset_id, file_name, old, callback) =>
     @_findAsset asset_id, (record) =>
+      return callback("http://google.com") unless record
       storage = @asset_servers[record["storage"]] || @asset_servers["cdn"]
-      if old
+      if record["storage"]
         url = "http://#{storage['host']}:#{storage['port']}/uploads/asset/image/#{asset_id}/#{file_name}"
       else
         url = "http://#{storage['host']}:#{storage['port']}/uploads/#{asset_id}/#{file_name}"
@@ -25,7 +26,7 @@ class Asset
   
   _findAsset: (asset_id, callback) ->
     o_id = new BSON.ObjectID asset_id
-    mongo.connect "mongodb://#{@user_name}:#{@password}@#{@server_ip}/#{@collection}?auto_reconnect=true&safe=true", (err, conn) ->
+    mongo.connect "mongodb://#{@server_ip}/#{@collection}?auto_reconnect=true&safe=true", (err, conn) ->
       conn.collection "assets", (dbErr, collection) => 
         collection.find({_id: o_id}).nextObject (err, result) =>
           callback(result) unless err?
