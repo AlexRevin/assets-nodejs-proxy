@@ -26,7 +26,7 @@ class Asset
   
   _findAsset: (asset_id, callback) ->
     o_id = new BSON.ObjectID asset_id
-    mongo.connect "mongodb://#{@server_ip}/#{@collection}?auto_reconnect=true&safe=true", (err, conn) ->
+    mongo.connect "mongodb://#{@ser_name}:#{@password}@#{@server_ip}/#{@collection}?auto_reconnect=true&safe=true", (err, conn) ->
       conn.collection "assets", (dbErr, collection) => 
         collection.find({_id: o_id}).nextObject (err, result) =>
           callback(result) unless err?
