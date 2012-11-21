@@ -18,7 +18,7 @@ class Asset
     @_findAsset asset_id, (record) =>
       return callback("http://google.com") unless record
       storage = @asset_servers[record["storage"]] || @asset_servers["cdn"]
-      if record["storage"]
+      if record["storage"]?
         url = "http://#{storage['host']}:#{storage['port']}/uploads/asset/image/#{asset_id}/#{file_name}"
       else
         url = "http://#{storage['host']}:#{storage['port']}/uploads/#{asset_id}/#{file_name}"
