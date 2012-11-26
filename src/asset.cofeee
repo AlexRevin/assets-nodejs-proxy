@@ -26,6 +26,5 @@ class Asset
     @db.collection "assets", (dbErr, collection) => 
       collection.find({_id: o_id}).nextObject (err, result) =>
         callback(result) unless err?
-        @db.close()
           
 exports.Asset = Asset
