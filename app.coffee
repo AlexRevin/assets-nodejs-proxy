@@ -22,7 +22,8 @@ manager.open (err, db) =>
   asset = new asset_klass conf, db
   
   app.get "/uploads/:image_id/:file_name", (req, res) ->
-    asset.url req.params.image_id, req.params.file_name, (url) ->
-      res.redirect url
+    res.redirect "http://cdn2.sunfoxtravel.ru/uploads/508461e25999e42c38000013/view_IMG_2662.JPG"
+    # asset.url req.params.image_id, req.params.file_name, (url) ->
+      # res.redirect url
     
 app.listen conf.port
