@@ -9,7 +9,7 @@ conf = require('./conf/app.yml')[app.get('env')]
 
 serverOptions =
   auto_reconnect: true
-  poolSize: 5
+  poolSize: 10
 
 srv = new mongo.Server(conf.db_server, 27017, serverOptions)
 manager = new mongo.Db(conf.db_collection, srv, {safe: true});
