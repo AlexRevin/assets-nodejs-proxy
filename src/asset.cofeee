@@ -4,14 +4,11 @@ BSON = mongo.BSONPure
 Asset = {}
 
 class Asset
-  constructor: (opts) ->
+  constructor: (opts, db) ->
     @Asset = this
+    @db = db
     @host = opts.asset_host
     @port = opts.asset_port
-    @user_name = opts.db_login
-    @password = opts.db_pass
-    @server_ip = opts.db_server
-    @collection = opts.db_collection
     @asset_servers = opts.asset_servers
     
   url: (asset_id, file_name, callback) =>
@@ -26,10 +23,9 @@ class Asset
   
   _findAsset: (asset_id, callback) ->
     o_id = new BSON.ObjectID asset_id
-    mongo.connect "mongodb://#{@user_name}:#{@password}@#{@server_ip}/#{@collection}?auto_reconnect=true&safe=true", (err, conn) ->
-      conn.collection "assets", (dbErr, collection) => 
-        collection.find({_id: o_id}).nextObject (err, result) =>
-          callback(result) unless err?
-          conn.close()
+    @db.collection "assets", (dbErr, collection) => 
+      collection.find({_id: o_id}).nextObject (err, result) =>
+        callback(result) unless err?
+        @db.close()
           
 exports.Asset = Asset
