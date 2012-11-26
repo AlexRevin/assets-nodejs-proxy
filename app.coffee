@@ -18,8 +18,9 @@ manager = new mongo.Db(conf.db_collection, srv, {safe: true});
 asset_klass = require('./lib/asset.js').Asset
 
 manager.open (err, db) =>
+  db.authenticate conf.db_login, conf.db_pass
   asset = new asset_klass conf, db
-    
+  
   app.get "/uploads/:image_id/:file_name", (req, res) ->
     asset.url req.params.image_id, req.params.file_name, (url) ->
       res.redirect url
