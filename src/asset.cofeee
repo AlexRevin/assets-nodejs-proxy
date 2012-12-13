@@ -30,7 +30,7 @@ class Asset
     o_id = new BSON.ObjectID asset_id
     @db.collection "assets", (dbErr, collection) => 
       h = {}
-      h["stat.#{req.headers.referer.replace(/\.\?\:/g, '-')}"] = 1
+      h["stat.#{req.headers.referer.replace(/[\.\?\:]/g, '-')}"] = 1
       collection.update {_id: o_id}, {$inc: h}, {safe:true}, (err) -> 
        console.log err
     
