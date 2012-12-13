@@ -22,7 +22,7 @@ manager.open (err, db) =>
   asset = new asset_klass conf, db
   
   app.get "/uploads/:image_id/:file_name", (req, res) ->
-    asset.url req.params.image_id, req.params.file_name, (url) ->
+    asset.url req, (url) ->
       res.redirect url
     
 app.listen conf.port
